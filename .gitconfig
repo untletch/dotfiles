@@ -1,0 +1,15 @@
+[user]
+  name = untletch
+  email = mwamathai99@gmail.com
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+[color "status"]
+  added = green
+  changed = blue
+  untracked = red 
+[color "diff"]
+  meta = yellow
+  old = red 
+  new = green
