@@ -120,7 +120,6 @@ set smartcase                        " Override 'ignorecase' when pattern has up
 set incsearch                        " Show match for partly typed search command
 set splitbelow                       " New horizontal split screen is set below
 set splitright                       " New vertical split screen is set to the right
-" set noswapfile                     " Stops creation of swap files
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Navigation Settings
