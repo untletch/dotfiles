@@ -27,6 +27,7 @@ install htop
 install wget
 install tmux
 install gparted
+install nasm
 
 echo "Installing snaps"
 function install_snap {
