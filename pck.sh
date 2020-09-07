@@ -14,9 +14,9 @@ function install {
     echo "PLEASE INSTALL MINICONDA"
   fi
 }
+install black
 install flake8
 install ipython
-install flake8
 
 echo "cloning dotfiles repository..."
 git clone https://github.com/untletch/dotfiles > /dev/null
