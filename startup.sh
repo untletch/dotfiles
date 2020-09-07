@@ -15,19 +15,20 @@ function install {
   fi
 }
 
-install vim-gtk
-install git
+install build-essential
 install curl
-install i3
-install vlc
-install zeal
-install qbittorrent
 install foliate
-install htop
-install wget
-install tmux
+install git
 install gparted
+install htop
+install i3
 install nasm
+install qbittorrent
+install tmux
+install vim-gtk
+install vlc
+install wget
+install zeal
 
 echo "Installing snaps"
 function install_snap {
