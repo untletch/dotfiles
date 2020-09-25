@@ -1,4 +1,3 @@
-# ~/.i3
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
@@ -40,7 +39,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # the arrows is not convenient
 set $up k
 set $down j
-set $left n
+set $left h
 set $right l
 
 # use Mouse+Mod1 to drag floating windows to their wanted position
@@ -86,7 +85,7 @@ bindsym Mod1+Shift+Up move up
 bindsym Mod1+Shift+Right move right
 
 # split in horizontal orientation
-bindsym Mod1+h split h
+bindsym Mod1+n split n
 
 # split in vertical orientation
 bindsym Mod1+v split v
