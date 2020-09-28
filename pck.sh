@@ -27,6 +27,14 @@ echo "alias l='ls -Alh'" >> $HOME/.bashrc
 echo "CREATED VIMRC SYMLINK"
 [ -d "$HOME/dotfiles" ] && ln -s $HOME/dotfiles/.vimrc $HOME/.vimrc
 
+echo "add sites to hosts"
+sudo su
+echo "0.0.0.0 twitter.com" >> /etc/hosts
+echo "0.0.0.0 lichess.org" >> /etc/hosts
+echo "0.0.0.0 www.youtube.com" >> /etc/hosts
+echo "0.0.0.0 www.reddit.com"  >> /etc/hosts
+exit
+
 echo "create env directories"
 mkdir js python rust
 
