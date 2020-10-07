@@ -17,6 +17,7 @@ function install {
 install black
 install flake8
 install ipython
+install jupyterlab
 
 echo "cloning dotfiles repository..."
 git clone https://github.com/untletch/dotfiles > /dev/null
