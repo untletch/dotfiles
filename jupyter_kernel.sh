@@ -22,3 +22,4 @@ echo "Installing c++ kernel..."
 conda create -n cling
 conda activate cling
 conda install xeus-cling -c conda-forge
+conda install -c conda-forge jupyterlab
