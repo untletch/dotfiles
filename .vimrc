@@ -135,7 +135,7 @@ noremap <Right> <Nop>
 :imap jj <Esc>
 
 " Split screen navigations
-" Ctrl + j move to split below
+" <C-W>w move between terminal and window
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
