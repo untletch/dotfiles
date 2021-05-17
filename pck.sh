@@ -32,17 +32,17 @@ echo "add sites to hosts"
 sudo su
 echo "0.0.0.0 twitter.com" >> /etc/hosts
 echo "0.0.0.0 lichess.org" >> /etc/hosts
-echo "0.0.0.0 www.youtube.com" >> /etc/hosts
 echo "0.0.0.0 www.reddit.com"  >> /etc/hosts
 exit
 
 echo "create env directories"
-mkdir js python rust
+mkdir js python rust cpp
 
 echo "create js env"
 touch js/index.js
 cd js && cp $HOME/dotfiles/.eslintrc.js .
-npm install eslint prettier --save-dev && eslint --init
+npm install -g eslint prettier
+npm init -y && eslint --init
 cd
 # check if '(npx )eslint --init'
 

@@ -25,7 +25,7 @@ install i3
 install nasm
 install qbittorrent
 install tmux
-install vim-gtk
+install vim-gtk3
 install vlc
 install wget
 install zeal
@@ -49,6 +49,7 @@ install_snap node --classic
 install_snap bolls
 install_snap pomotroid
 install_snap docker
+# add databases
 
 echo "configure docker to remove sudo"
 echo "adding docker as a user group"

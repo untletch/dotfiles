@@ -37,8 +37,14 @@ Plugin 'altercation/vim-colors-solarized'
 " Plugin for vim colorschemes
 Plugin 'flazz/vim-colorschemes'
 
+" Plugin for syntax highlighting
+Plugin 'sheerun/vim-polyglot'
+
 " Plugin for html
 Plugin 'mattn/emmet-vim'
+
+" Plugin for html-tags
+Plugin 'Valloric/MatchTagAlways'
 
 " Plugin for go language
 Plugin 'fatih/vim-go'
@@ -46,6 +52,10 @@ Plugin 'fatih/vim-go'
 " Plugins for rust language
 Plugin 'rust-lang/rust.vim'
 Plugin 'rhysd/rust-doc.vim'
+
+" Plugin for svelte syntax highlighting
+Plugin 'evanleck/vim-svelte'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -141,6 +151,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -151,7 +162,7 @@ nnoremap <C-H> <C-W><C-H>
 " Syntastic
 " Remember to pip install flake8 and black
 " Show Gvim where flake8 is installed
-let g:syntastic_python_flake8_exec = '/home/isaac/miniconda3/bin/flake8'
+let g:syntastic_python_flake8_exec = '/home/michaelw/miniconda3/bin/flake8'
 
 " Ale
 " List of languages for ale to use
@@ -159,8 +170,11 @@ let g:syntastic_python_flake8_exec = '/home/isaac/miniconda3/bin/flake8'
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'vue': ['eslint'],
+\   'svelte': ['eslint'],
+\   'css': ['prettier'],
 \   'scss': ['prettier'],
 \   'html': ['prettier'],
+\   'go': ['gometalinter', 'gofmt'],
 \}
 " Only run linters named in ale_linters settings
 let g:ale_linters_explicit = 1
@@ -169,10 +183,12 @@ let g:ale_fixers = {
   \    'javascript': ['prettier'],
   \    'typescript': ['prettier', 'tslint'],
   \    'vue': ['prettier'],
-  \    'scss': ['prettier'],
+  \    'svelte': ['prettier'],
+  \    'css': ['prettier'],
   \    'html': ['prettier'],
   \    'reason': ['refmt'],
-  \    'python': ['black']
+  \    'python': ['black'],
+  \    'go': ['gofmt'],
 \}
 
 " FORMATTERS
@@ -183,7 +199,10 @@ au FileType html setlocal formatprg=js-beautify\ --type\ html
 au FileType scss setlocal formatprg=prettier\ --parser\ css
 au FileType css setlocal formatprg=prettier\ --parser\ css
 
+" Only run linters on save
 let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
 
 " C++ syntastic linting
 let g:syntastic_cpp_compiler = 'g++'
@@ -211,6 +230,15 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
+
+" MatchTagAlways
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'svelte' : 1,
+    \}
 
 " Folding Key
 nnoremap <space> za
