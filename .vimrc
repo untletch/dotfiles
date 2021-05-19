@@ -162,7 +162,7 @@ nnoremap <C-H> <C-W><C-H>
 " Syntastic
 " Remember to pip install flake8 and black
 " Show Gvim where flake8 is installed
-let g:syntastic_python_flake8_exec = '/home/michaelw/miniconda3/bin/flake8'
+let g:syntastic_python_flake8_exec = '$HOME/miniconda3/bin/flake8'
 
 " Ale
 " List of languages for ale to use

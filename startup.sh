@@ -49,6 +49,7 @@ install_snap node --classic
 install_snap bolls
 install_snap pomotroid
 install_snap docker
+install_snap discord
 # add databases
 
 echo "configure docker to remove sudo"
