@@ -17,11 +17,11 @@ function install {
 
 install build-essential
 install curl
-install foliate
 install git
 install gparted
 install htop
 install i3
+install ranger
 install nasm
 install qbittorrent
 install tmux
@@ -29,6 +29,11 @@ install vim-gtk3
 install vlc
 install wget
 install zeal
+install postgresql postgresql-contrib
+# check for docs in https://www.pgadmin.org/download/pgadmin-4-apt/
+# enter psql
+# type \password
+# mongodb https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 
 echo "Installing snaps"
 function install_snap {
@@ -46,6 +51,7 @@ function install_snap {
 }
 
 install_snap node --classic
+install_snap foliate
 install_snap bolls
 install_snap pomotroid
 install_snap docker
