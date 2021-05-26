@@ -56,6 +56,7 @@ install_snap bolls
 install_snap pomotroid
 install_snap docker
 install_snap discord
+install_snap postman
 # add databases
 
 echo "configure docker to remove sudo"
