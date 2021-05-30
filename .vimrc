@@ -49,10 +49,6 @@ Plugin 'Valloric/MatchTagAlways'
 " Plugin for go language
 Plugin 'fatih/vim-go'
 
-" Plugins for rust language
-Plugin 'rust-lang/rust.vim'
-Plugin 'rhysd/rust-doc.vim'
-
 " Plugin for svelte syntax highlighting
 Plugin 'evanleck/vim-svelte'
 
@@ -176,6 +172,7 @@ let g:ale_linters = {
 \   'html': ['prettier'],
 \   'go': ['gometalinter', 'gofmt'],
 \}
+
 " Only run linters named in ale_linters settings
 let g:ale_linters_explicit = 1
 
@@ -189,6 +186,7 @@ let g:ale_fixers = {
   \    'reason': ['refmt'],
   \    'python': ['black'],
   \    'go': ['gofmt'],
+  \    'rust': ['rustfmt'],
 \}
 
 " FORMATTERS
