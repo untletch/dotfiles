@@ -49,6 +49,10 @@ cd
 echo "CREATED VIMRC SYMLINK"
 [ -d "$HOME/dotfiles" ] && ln -s $HOME/dotfiles/.vimrc $HOME/.vimrc
 
+# use pulseaudio to control volume
+echo "i3 volume notifications"
+git clone https://github.com/hastinbe/i3-volume.git ~/i3-volume
+
 echo "Copying i3 configs"
 cp $HOME/dotfiles/i3/config $HOME
 cp $HOME/dotfiles/i3/i3status $HOME/.config
