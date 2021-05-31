@@ -1,0 +1,4 @@
+! Use a truetype font and size.
+xterm*faceName: Monospace
+xterm*faceSize: 10
+xterm*geometry: 80x24

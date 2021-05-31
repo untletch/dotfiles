@@ -26,14 +26,18 @@ install nasm
 install qbittorrent
 install tmux
 install vim-gtk3
+install fish
 install vlc
+install mpv
 install wget
 install zeal
 install postgresql postgresql-contrib
-# check for docs in https://www.pgadmin.org/download/pgadmin-4-apt/
+# used digital ocean docs 
+# install pgadmin and check for docs in https://www.pgadmin.org/download/pgadmin-4-apt/
 # enter psql
 # type \password
 # mongodb https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+# mongo compass https://www.mongodb.com/try/download/compass
 
 echo "Installing snaps"
 function install_snap {
