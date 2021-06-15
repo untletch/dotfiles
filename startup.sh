@@ -39,6 +39,10 @@ install postgresql postgresql-contrib
 # mongodb https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 # mongo compass https://www.mongodb.com/try/download/compass
 
+# install zathura
+sudo add-apt-repository ppa:spvkgn/zathura-mupdf
+sudo apt install zathura zathura-pdf-mupdf
+
 echo "Installing snaps"
 function install_snap {
   which $1 &> /dev/null

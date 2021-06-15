@@ -63,6 +63,11 @@ cp $HOME/dotfiles/.gitconfig $HOME
 echo "Copying tmux.conf"
 cp $HOME/dotfiles/.tmux.conf $HOME
 
+echo "Make fish Default"
+# use https://www.peachpit.com/articles/article.aspx?p=659655&seqNum=3
+sudo chsh -s `which fish`
+conda init fish
+
 echo "Installing rust..."
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
