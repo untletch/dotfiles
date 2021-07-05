@@ -31,6 +31,7 @@ install vlc
 install mpv
 install wget
 install zeal
+install valgrind
 install postgresql postgresql-contrib
 # used digital ocean docs 
 # install pgadmin and check for docs in https://www.pgadmin.org/download/pgadmin-4-apt/

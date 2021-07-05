@@ -25,6 +25,12 @@ git clone https://github.com/untletch/dotfiles > /dev/null
 echo "add alias (l) to bashrc"
 echo "alias l='ls -Alh'" >> $HOME/.bashrc
 
+echo "add rust analyzer binary to fish"
+# cd ~/.local && mkdir bin
+# set PATH ~/.local/bin $PATH
+# curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/.local/bin/rust-analyzer
+# chmod +x ~/.local/bin/rust-analyzer
+
 echo "CREATED VIMRC SYMLINK"
 [ -d "$HOME/dotfiles" ] && ln -s $HOME/dotfiles/.vimrc $HOME/.vimrc
 
