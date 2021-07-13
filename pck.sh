@@ -77,4 +77,9 @@ conda init fish
 echo "Installing rust..."
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
+echo "install bible from  npm"
+sudo npm i g bible
+cd .bible/en
+npm i jsonrequest
+
 # problems with ssh keys https://gist.github.com/adamjohnson/5682757

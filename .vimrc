@@ -155,10 +155,8 @@ nnoremap <C-H> <C-W><C-H>
 " fzf
 " :Files
 
-" Syntastic
-" Remember to pip install flake8 and black
-" Show Gvim where flake8 is installed
-let g:syntastic_python_flake8_exec = '$HOME/miniconda3/bin/flake8'
+" Disable Syntastic
+let g:syntastic_python_checkers = []
 
 " Ale
 " List of languages for ale to use
@@ -171,11 +169,14 @@ let g:ale_linters = {
 \   'scss': ['prettier'],
 \   'html': ['prettier'],
 \   'go': ['gometalinter', 'gofmt'],
+\   'python': ['flake8'],
+\   'rust': ['analyzer'],
 \}
 
 " Only run linters named in ale_linters settings
 let g:ale_linters_explicit = 1
 
+" Run 'rustup component add rustfmt'
 let g:ale_fixers = {
   \    'javascript': ['prettier'],
   \    'typescript': ['prettier', 'tslint'],
@@ -183,8 +184,7 @@ let g:ale_fixers = {
   \    'svelte': ['prettier'],
   \    'css': ['prettier'],
   \    'html': ['prettier'],
-  \    'reason': ['refmt'],
-  \    'python': ['black'],
+  \    'python': ['black', 'isort'],
   \    'go': ['gofmt'],
   \    'rust': ['rustfmt'],
 \}
