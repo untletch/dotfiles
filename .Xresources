@@ -1,4 +1,15 @@
+! xrdb -merge ~/.Xresources to restart
+
 ! Use a truetype font and size.
 xterm*faceName: Monospace
 xterm*faceSize: 10
+
+! colorscheme
+XTerm*termName: xterm-256color
+
 xterm*geometry: 80x24
+
+! use CLIPBOARD buffer
+xterm*VT100.Translations: #override \
+                 Ctrl Shift <Key>V:    insert-selection(CLIPBOARD) \n\
+                 Ctrl Shift <Key>C:    copy-selection(CLIPBOARD)

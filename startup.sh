@@ -60,6 +60,8 @@ function install_snap {
 }
 
 install_snap node --classic
+install_snap go --classic
+install_snap pypy3 --classic
 install_snap foliate
 install_snap bolls
 install_snap pomotroid

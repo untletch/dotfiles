@@ -12,14 +12,15 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Keep Plugin commands between vundle#begin/end.
 
-" plugin for syntax linting
-Plugin 'vim-syntastic/syntastic'
-
 " Plugin for syntax linting
 Plugin 'dense-analysis/ale'
 
 " plugin for comments
 Plugin 'tomtom/tcomment_vim'
+
+" plugin for python debugging
+" works in vim 8.2
+Plugin 'puremourning/vimspector'
 
 " Plugin for file tree
 Plugin 'preservim/nerdtree' 
@@ -75,8 +76,14 @@ filetype plugin indent on    " required
 
 syntax enable
 syntax on
+set t_Co=256
 if has('gui_running')
   colorscheme solarized8_dark
+else
+    colorscheme molokai
+    " disable mouse activity when using vim
+    set mouse=
+    set ttymouse=
 endif
 
 
@@ -110,10 +117,14 @@ set foldlevel=99
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim UI
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Hybrid numbering
 set number                        " Line numbers on
+set relativenumber                " current line is number 0
+
 set backspace=indent,eol,start    " Backspace to delete normally
 set showmatch                     " Show matching brackets/parenthesis
 set title                         " Show info in the window title
+set cursorline                    " Highlight current line 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Settings
@@ -127,6 +138,13 @@ set incsearch                        " Show match for partly typed search comman
 set splitbelow                       " New horizontal split screen is set below
 set splitright                       " New vertical split screen is set to the right
 
+" cp build and run code
+autocmd Filetype python nmap <leader>r :w<CR>:!clear;pypy3 % > output.txt<CR>
+autocmd Filetype cpp nmap <leader>r :w<CR>:!clear;g++ -O2 -Wall a.cpp -o a && ./a > output.txt<CR>
+
+" use ,q to exit
+" nnoremap <leader>q :wq <CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Navigation Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -138,7 +156,7 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 
 " press i to enter insert mode and jj to exit.
-:imap jj <Esc>
+imap jj <Esc>
 
 " Split screen navigations
 " <C-W>w move between terminal and window
@@ -155,22 +173,24 @@ nnoremap <C-H> <C-W><C-H>
 " fzf
 " :Files
 
-" Disable Syntastic
-let g:syntastic_python_checkers = []
-
 " Ale
 " List of languages for ale to use
 " Remember to npm install eslint and prettier
+" sudo npm i -g eslint-plugin-react eslint-plugin-react(hooks/native/redux)
+" sudo apt install clang-tidy
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'vue': ['eslint'],
 \   'svelte': ['eslint'],
+\   'react': ['eslint'],
 \   'css': ['prettier'],
 \   'scss': ['prettier'],
 \   'html': ['prettier'],
 \   'go': ['gometalinter', 'gofmt'],
 \   'python': ['flake8'],
 \   'rust': ['analyzer'],
+\   'cpp': ['clangtidy'],
+\   'c': ['clangtidy'],
 \}
 
 " Only run linters named in ale_linters settings
@@ -182,6 +202,7 @@ let g:ale_fixers = {
   \    'typescript': ['prettier', 'tslint'],
   \    'vue': ['prettier'],
   \    'svelte': ['prettier'],
+  \    'react': ['prettier'],
   \    'css': ['prettier'],
   \    'html': ['prettier'],
   \    'python': ['black', 'isort'],
@@ -189,23 +210,11 @@ let g:ale_fixers = {
   \    'rust': ['rustfmt'],
 \}
 
-" FORMATTERS
-au FileType javascript setlocal formatprg=prettier
-au FileType javascript.jsx setlocal formatprg=prettier
-au FileType typescript setlocal formatprg=prettier\ --parser\ typescript
-au FileType html setlocal formatprg=js-beautify\ --type\ html
-au FileType scss setlocal formatprg=prettier\ --parser\ css
-au FileType css setlocal formatprg=prettier\ --parser\ css
-
 " Only run linters on save
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 
-" C++ syntastic linting
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = ' -std=c++14'
-"
 "
 " Emmet
 " Use ,, for html5 snippet
@@ -229,6 +238,9 @@ let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 
+" Vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
+
 " MatchTagAlways
 let g:mta_filetypes = {
     \ 'html' : 1,
@@ -236,11 +248,11 @@ let g:mta_filetypes = {
     \ 'xml' : 1,
     \ 'jinja' : 1,
     \ 'svelte' : 1,
+    \ 'jsx' : 1,
     \}
 
 " Folding Key
 nnoremap <space> za
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
  " => Shortcuts 

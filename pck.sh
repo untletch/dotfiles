@@ -18,6 +18,8 @@ install black
 install flake8
 install ipython
 install jupyterlab
+# python markdown preview lib
+install grip
 
 echo "cloning dotfiles repository..."
 git clone https://github.com/untletch/dotfiles > /dev/null
@@ -77,9 +79,8 @@ conda init fish
 echo "Installing rust..."
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-echo "install bible from  npm"
-sudo npm i g bible
-cd .bible/en
-npm i jsonrequest
+# install rust command line utitlities
+cargo install dust
+cargo install ripgrep
 
 # problems with ssh keys https://gist.github.com/adamjohnson/5682757

@@ -1,0 +1,11 @@
+*.swp
+node_modules/
+Cargo.lock
+
+# python
+.py[cod]
+__pycache__/
+.env
+.venv
+env/
+venv/

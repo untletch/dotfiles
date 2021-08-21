@@ -1,6 +1,8 @@
 [user]
   name = untletch
   email = untletch@gmail.com
+[core]
+  excludesfile = $HOME/.gitignore_global
 [color]
   diff = auto
   status = auto
