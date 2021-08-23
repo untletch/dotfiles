@@ -64,6 +64,7 @@ install_snap go --classic
 install_snap pypy3 --classic
 install_snap foliate
 install_snap bolls
+install_snap bibletime
 install_snap pomotroid
 install_snap docker
 install_snap discord
