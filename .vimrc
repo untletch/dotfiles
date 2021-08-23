@@ -208,6 +208,8 @@ let g:ale_fixers = {
   \    'python': ['black', 'isort'],
   \    'go': ['gofmt'],
   \    'rust': ['rustfmt'],
+  \    'cpp': ['clangtidy'],
+  \    'c': ['clangtidy'],
 \}
 
 " Only run linters on save
