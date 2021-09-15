@@ -29,6 +29,7 @@ echo "alias l='ls -Alh'" >> $HOME/.bashrc
 
 echo "add rust analyzer binary to fish"
 # cd ~/.local && mkdir bin
+# set -Ua fish_user_paths ~/.local/bin      OR
 # set PATH ~/.local/bin $PATH
 # curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/.local/bin/rust-analyzer
 # chmod +x ~/.local/bin/rust-analyzer
@@ -82,5 +83,6 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 # install rust command line utitlities
 cargo install dust
 cargo install ripgrep
+cargo install git-delta
 
 # problems with ssh keys https://gist.github.com/adamjohnson/5682757
