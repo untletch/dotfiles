@@ -1,6 +1,6 @@
 *.swp
 node_modules/
-Cargo.lock
+/target/
 
 # python
 .py[cod]
