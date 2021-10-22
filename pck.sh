@@ -42,6 +42,7 @@ sudo su
 echo "0.0.0.0 twitter.com" >> /etc/hosts
 echo "0.0.0.0 lichess.org" >> /etc/hosts
 echo "0.0.0.0 www.reddit.com"  >> /etc/hosts
+echo "0.0.0.0 old.reddit.com"  >> /etc/hosts
 echo "0.0.0.0 www.youtube.com"  >> /etc/hosts
 exit
 

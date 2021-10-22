@@ -53,6 +53,8 @@ Plugin 'fatih/vim-go'
 " Plugin for svelte syntax highlighting
 Plugin 'evanleck/vim-svelte'
 
+" Plugin for git
+Plugin 'airblade/vim-gitgutter'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -125,6 +127,23 @@ set backspace=indent,eol,start    " Backspace to delete normally
 set showmatch                     " Show matching brackets/parenthesis
 set title                         " Show info in the window title
 set cursorline                    " Highlight current line 
+set laststatus=2                  " Show status line at all times
+
+" Statusline
+set statusline=
+set statusline+=%#PmenuSel#
+set statusline+=%#LineNr#
+set statusline+=\ %f
+set statusline+=%m\ 
+set statusline+=%=
+set statusline+=%#CursorColumn#
+set statusline+=\ %y
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l/%L
+set statusline+=\ :%c
+set statusline+=\ 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Settings
@@ -183,12 +202,11 @@ let g:ale_linters = {
 \   'vue': ['eslint'],
 \   'svelte': ['eslint'],
 \   'react': ['eslint'],
-\   'css': ['prettier'],
+\   'css': ['stylelint', 'prettier'],
 \   'scss': ['prettier'],
 \   'html': ['prettier'],
 \   'go': ['gometalinter', 'gofmt'],
 \   'python': ['flake8'],
-\   'rust': ['analyzer'],
 \   'cpp': ['clangtidy'],
 \   'c': ['clangtidy'],
 \}
@@ -203,7 +221,7 @@ let g:ale_fixers = {
   \    'vue': ['prettier'],
   \    'svelte': ['prettier'],
   \    'react': ['prettier'],
-  \    'css': ['prettier'],
+  \    'css': ['stylelint', 'prettier'],
   \    'html': ['prettier'],
   \    'python': ['black', 'isort'],
   \    'go': ['gofmt'],

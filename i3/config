@@ -29,6 +29,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# use xfce power management
+exec_always --no-startup-id xfce4-power-manager
+
 # Wallpaper for i3 static color dark-grey
 exec --no-startup-id xsetroot -solid "#333333"
 
@@ -73,7 +76,7 @@ floating_modifier Mod1
 
 # start a terminal
 bindsym Mod1+Return exec i3-sensible-terminal
-bindsym Control+Mod1+t exec i3-sensible-terminal
+bindsym Control+Mod1+t exec uxterm
 
 # kill focused window
 bindsym Mod1+Shift+q kill
@@ -218,7 +221,6 @@ bindsym Mod1+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
-        position top
 }
 
 #######################################################################
