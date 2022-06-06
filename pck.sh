@@ -83,8 +83,9 @@ echo "Installing rust..."
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # install rust command line utitlities
-cargo install dust
-cargo install ripgrep
-cargo install git-delta
+cargo install dust   # check hard drive space
+cargo install ripgrep # grep utility
+cargo install git-delta # git diff files
+cargo install fd-find # find utility
 
 # problems with ssh keys https://gist.github.com/adamjohnson/5682757

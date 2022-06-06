@@ -18,10 +18,6 @@ Plugin 'dense-analysis/ale'
 " plugin for comments
 Plugin 'tomtom/tcomment_vim'
 
-" plugin for python debugging
-" works in vim 8.2
-Plugin 'puremourning/vimspector'
-
 " Plugin for file tree
 Plugin 'preservim/nerdtree' 
 
@@ -46,9 +42,6 @@ Plugin 'mattn/emmet-vim'
 
 " Plugin for html-tags
 Plugin 'Valloric/MatchTagAlways'
-
-" Plugin for go language
-Plugin 'fatih/vim-go'
 
 " Plugin for svelte syntax highlighting
 Plugin 'evanleck/vim-svelte'
@@ -157,8 +150,12 @@ set incsearch                        " Show match for partly typed search comman
 set splitbelow                       " New horizontal split screen is set below
 set splitright                       " New vertical split screen is set to the right
 
-" cp build and run code
-autocmd Filetype python nmap <leader>r :w<CR>:!clear;pypy3 % > output.txt<CR>
+" enter terminal mode using ','t
+tnoremap <leader>t <c-w>N
+" build and run code
+autocmd Filetype python nmap <leader>r :w<CR>:!clear;pypy3 %<CR>
+autocmd Filetype rust nmap <leader>r :w<CR>:!clear;cargo run<CR>
+autocmd Filetype go nmap <leader>r :w<CR>:!clear;go run .<CR>
 autocmd Filetype cpp nmap <leader>r :w<CR>:!clear;g++ -O2 -Wall a.cpp -o a && ./a > output.txt<CR>
 
 " use ,q to exit
@@ -205,7 +202,7 @@ let g:ale_linters = {
 \   'css': ['stylelint', 'prettier'],
 \   'scss': ['prettier'],
 \   'html': ['prettier'],
-\   'go': ['gometalinter', 'gofmt'],
+\   'go': ['golangci-lint', 'gofmt'],
 \   'python': ['flake8'],
 \   'cpp': ['clangtidy'],
 \   'c': ['clangtidy'],
@@ -224,10 +221,10 @@ let g:ale_fixers = {
   \    'css': ['stylelint', 'prettier'],
   \    'html': ['prettier'],
   \    'python': ['black', 'isort'],
-  \    'go': ['gofmt'],
+  \    'go': ['gofmt', 'goimports'],
   \    'rust': ['rustfmt'],
-  \    'cpp': ['clangtidy'],
-  \    'c': ['clangtidy'],
+  \    'cpp': ['clangtidy', 'clang-format'],
+  \    'c': ['clangtidy', 'clang-format'],
 \}
 
 " Only run linters on save
@@ -247,19 +244,6 @@ let g:user_emmet_mode='n'
 map <leader>n :NERDTreeToggle<CR>
 let NERDTreeChDirMode = 2   " The number of file indents to be shown
 let NERDTreeShowHidden = 1  " Show hidden files
-
-" Go
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-
-" Vimspector
-let g:vimspector_enable_mappings = 'HUMAN'
 
 " MatchTagAlways
 let g:mta_filetypes = {

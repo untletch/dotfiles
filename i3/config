@@ -68,7 +68,7 @@ bindsym XF86AudioMute        exec --no-startup-id $volumepath/volume -n -t $stat
 # the arrows is not convenient
 set $up k
 set $down j
-set $left h
+set $left t
 set $right l
 
 # use Mouse+Mod1 to drag floating windows to their wanted position
@@ -81,6 +81,9 @@ bindsym Control+Mod1+t exec uxterm
 # kill focused window
 bindsym Mod1+Shift+q kill
 bindsym Control+q kill
+
+# switch workspaces
+bindsym Mod1+Tab workspace next
 
 # start dmenu (a program launcher)
 bindsym Mod1+d exec dmenu_run

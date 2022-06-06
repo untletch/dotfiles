@@ -69,6 +69,11 @@ install_snap pomotroid
 install_snap docker
 install_snap discord
 install_snap postman
+install_snap taskline
+install_snap protobuf
+
+# rename taskline to tl
+snap alias taskline tl
 # add databases
 
 echo "configure docker to remove sudo"
