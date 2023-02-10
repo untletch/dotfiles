@@ -15,8 +15,11 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin for syntax linting
 Plugin 'dense-analysis/ale'
 
-" plugin for comments
+" Plugin for comments
 Plugin 'tomtom/tcomment_vim'
+
+" Plugin for visualizing undo history
+Plugin 'mbbill/undotree'
 
 " Plugin for file tree
 Plugin 'preservim/nerdtree' 
@@ -28,11 +31,11 @@ Plugin 'junegunn/fzf.vim'
 " Plugin for auto pairing brackets
 Plugin 'jiangmiao/auto-pairs'
 
-" Plugin for solarized
-Plugin 'altercation/vim-colors-solarized'
+" Plugin for multiple cursors
+Plugin 'mg979/vim-visual-multi'
 
-" Plugin for vim colorschemes
-Plugin 'flazz/vim-colorschemes'
+" Plugin for colorscheme
+Plugin 'tomasr/molokai'
 
 " Plugin for syntax highlighting
 Plugin 'sheerun/vim-polyglot'
@@ -46,8 +49,13 @@ Plugin 'Valloric/MatchTagAlways'
 " Plugin for svelte syntax highlighting
 Plugin 'evanleck/vim-svelte'
 
+
 " Plugin for git
+Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
+
+" Plugin for checking health
+Plugin 'rhysd/vim-healthcheck'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -71,15 +79,10 @@ filetype plugin indent on    " required
 
 syntax enable
 syntax on
-set t_Co=256
-if has('gui_running')
-  colorscheme solarized8_dark
-else
-    colorscheme molokai
-    " disable mouse activity when using vim
-    set mouse=
-    set ttymouse=
-endif
+colorscheme molokai
+" disable mouse activity when using vim
+set mouse=
+set ttymouse=
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -124,18 +127,17 @@ set laststatus=2                  " Show status line at all times
 
 " Statusline
 set statusline=
-set statusline+=%#PmenuSel#
-set statusline+=%#LineNr#
-set statusline+=\ %f
-set statusline+=%m\ 
-set statusline+=%=
-set statusline+=%#CursorColumn#
-set statusline+=\ %y
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-set statusline+=\[%{&fileformat}\]
-set statusline+=\ %p%%
-set statusline+=\ %l/%L
-set statusline+=\ :%c
+set statusline+=\ %f                                          " File name
+set statusline+=%m\                                           " modified flag
+set statusline+=\%{FugitiveStatusline()}                     " Current git branch
+set statusline+=%=                                            " Align left
+set statusline+=\ Buf:%n                                      " Buffer number
+set statusline+=\ %y                                          " Filetype
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}    " File encoding
+set statusline+=\[%{&fileformat}\]                            " EOL of the current buffer
+set statusline+=\ %p%%                                        " File percentage
+set statusline+=\ %l/%L                                       " Current line / Total lines
+set statusline+=\ :%c                                         " Current column
 set statusline+=\ 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -153,9 +155,10 @@ set splitright                       " New vertical split screen is set to the r
 " enter terminal mode using ','t
 tnoremap <leader>t <c-w>N
 " build and run code
-autocmd Filetype python nmap <leader>r :w<CR>:!clear;pypy3 %<CR>
+autocmd Filetype python nmap <leader>r :w<CR>:!clear;python %<CR>
 autocmd Filetype rust nmap <leader>r :w<CR>:!clear;cargo run<CR>
 autocmd Filetype go nmap <leader>r :w<CR>:!clear;go run .<CR>
+autocmd Filetype c nmap <leader>r :w<CR>:!clear;gcc -O2 -Wall -Wextra % -o out && ./out<CR>
 autocmd Filetype cpp nmap <leader>r :w<CR>:!clear;g++ -O2 -Wall a.cpp -o a && ./a > output.txt<CR>
 
 " use ,q to exit
@@ -165,14 +168,26 @@ autocmd Filetype cpp nmap <leader>r :w<CR>:!clear;g++ -O2 -Wall a.cpp -o a && ./
 " Navigation Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Disable arrow-keys in insert mode
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+
 " Disable arrow-keys in normal mode
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+
+" Disable arrow-keys in visual mode
+vnoremap <Up> <Nop>
+vnoremap <Down> <Nop>
+vnoremap <Left> <Nop>
+vnoremap <Right> <Nop>
 
 " press i to enter insert mode and jj to exit.
-imap jj <Esc>
+" imap jj <Esc>
 
 " Split screen navigations
 " <C-W>w move between terminal and window
@@ -196,16 +211,20 @@ nnoremap <C-H> <C-W><C-H>
 " sudo apt install clang-tidy
 let g:ale_linters = {
 \   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
+\   'javascriptreact': ['eslint'],
+\   'typescriptreact': ['eslint'],
 \   'vue': ['eslint'],
 \   'svelte': ['eslint'],
-\   'react': ['eslint'],
 \   'css': ['stylelint', 'prettier'],
-\   'scss': ['prettier'],
+\   'scss': ['stylelint'],
 \   'html': ['prettier'],
 \   'go': ['golangci-lint', 'gofmt'],
-\   'python': ['flake8'],
+\   'python': ['flake8', 'pylama'],
 \   'cpp': ['clangtidy'],
 \   'c': ['clangtidy'],
+\   'sql': ['sqlint'],
+\   'sh': ['shellcheck'],
 \}
 
 " Only run linters named in ale_linters settings
@@ -213,18 +232,23 @@ let g:ale_linters_explicit = 1
 
 " Run 'rustup component add rustfmt'
 let g:ale_fixers = {
-  \    'javascript': ['prettier'],
-  \    'typescript': ['prettier', 'tslint'],
-  \    'vue': ['prettier'],
-  \    'svelte': ['prettier'],
-  \    'react': ['prettier'],
+  \    'javascript': ['eslint'],
+  \    'typescript': ['eslint', 'prettier'],
+  \    'javascriptreact': ['prettier'],
+  \    'typescriptreact': ['prettier'],
+  \    'vue': ['eslint', 'prettier'],
+  \    'svelte': ['eslint'],
   \    'css': ['stylelint', 'prettier'],
+  \    'scss': ['stylelint', 'prettier'],
+  \    'json': ['jq', 'prettier'],
   \    'html': ['prettier'],
   \    'python': ['black', 'isort'],
   \    'go': ['gofmt', 'goimports'],
   \    'rust': ['rustfmt'],
   \    'cpp': ['clangtidy', 'clang-format'],
   \    'c': ['clangtidy', 'clang-format'],
+  \    'sql': ['sqlfmt'],
+  \    'sh': ['shfmt'],
 \}
 
 " Only run linters on save
@@ -232,7 +256,11 @@ let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 
-"
+" UndoTree
+nnoremap <Space>ut :UndotreeToggle<CR>
+
+nnoremap <Space>f :w<CR>:FZF<CR>
+
 " Emmet
 " Use ,, for html5 snippet
 let g:user_emmet_leader_key=','
@@ -244,6 +272,8 @@ let g:user_emmet_mode='n'
 map <leader>n :NERDTreeToggle<CR>
 let NERDTreeChDirMode = 2   " The number of file indents to be shown
 let NERDTreeShowHidden = 1  " Show hidden files
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 " MatchTagAlways
 let g:mta_filetypes = {
@@ -254,6 +284,13 @@ let g:mta_filetypes = {
     \ 'svelte' : 1,
     \ 'jsx' : 1,
     \}
+
+" Autopairs
+au FileType rust     let b:AutoPairs = AutoPairsDefine({'\w\zs<': '>'})
+au FileType html     let b:AutoPairs = AutoPairsDefine({'{%' : '%}'})
+
+" Change htmldjango to html
+au FileType htmldjango set filetype=html
 
 " Folding Key
 nnoremap <space> za

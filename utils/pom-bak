@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+
+# run in background `pom &`
+while true; do
+	for i in {1..4}; do
+		sleep 25m
+		if [ $i -lt 4 ]; then
+			notify-send "Time to take a short break"
+			sleep 5m
+			notify-send "Time to get back to work"
+		fi
+	done
+	notify-send "Time for a long break"
+	sleep 15m
+	notify-send "Time to work"
+done

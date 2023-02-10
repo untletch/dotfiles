@@ -5,14 +5,14 @@ echo "Installing apps from apt"
 sudo apt update && sudo apt full-upgrade -y
 
 function install {
-  which $1 &> /dev/null
+	which $1 &>/dev/null
 
-  if [ $? -ne 0 ]; then
-    echo "Installing: ${1}..."
-    sudo apt install -y $1
-  else
-    echo "Already installed: ${1}"
-  fi
+	if [ $? -ne 0 ]; then
+		echo "Installing: ${1}..."
+		sudo apt install -y $1
+	else
+		echo "Already installed: ${1}"
+	fi
 }
 
 install build-essential
@@ -33,7 +33,18 @@ install wget
 install zeal
 install valgrind
 install postgresql postgresql-contrib
-# used digital ocean docs 
+
+# Configure pgadmin
+conda create --name pgadmin python=3.10
+conda activate pgadmin
+pip install pgadmin4 gevent
+sudo mkdir /var/lib/pgadmin
+sudo mkdir /var/log/pgadmin
+sudo chown $USER /var/lib/pgadmin
+sudo chown $USER /var/log/pgadmin
+# command: pgadmin4
+
+# used digital ocean docs
 # install pgadmin and check for docs in https://www.pgadmin.org/download/pgadmin-4-apt/
 # enter psql
 # type \password
@@ -46,20 +57,19 @@ sudo apt install zathura zathura-pdf-mupdf
 
 echo "Installing snaps"
 function install_snap {
-  which $1 &> /dev/null
-  if [ -d "${HOME}/snap" ]; then
-    if [ $? -ne 0 ]; then
-      echo "Installing: ${1}..."
-      sudo snap install $1
-    else
-      echo "Already installed: ${1}"
-    fi
-  else
-    echo "PLEASE ENABLE SNAPD"
-  fi
+	which $1 &>/dev/null
+	if [ -d "${HOME}/snap" ]; then
+		if [ $? -ne 0 ]; then
+			echo "Installing: ${1}..."
+			sudo snap install $1
+		else
+			echo "Already installed: ${1}"
+		fi
+	else
+		echo "PLEASE ENABLE SNAPD"
+	fi
 }
 
-install_snap node --classic
 install_snap go --classic
 install_snap pypy3 --classic
 install_snap foliate

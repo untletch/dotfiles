@@ -16,8 +16,16 @@ function install {
 }
 install black
 install flake8
+install isort
+install pylama
+install youtube-dl
 install ipython
+install bpython
 install jupyterlab
+# django and go templates linter and formatter
+install djlint
+# profiler
+install scalene
 # python markdown preview lib
 install grip
 
@@ -27,12 +35,20 @@ git clone https://github.com/untletch/dotfiles > /dev/null
 echo "add alias (l) to bashrc"
 echo "alias l='ls -Alh'" >> $HOME/.bashrc
 
+# install neovim
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
+mv nvim.appimage ~/bin/nvim
+
 echo "add rust analyzer binary to fish"
 # cd ~/.local && mkdir bin
 # set -Ua fish_user_paths ~/.local/bin      OR
 # set PATH ~/.local/bin $PATH
 # curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/.local/bin/rust-analyzer
 # chmod +x ~/.local/bin/rust-analyzer
+
+# install starship
+curl -sS https://starship.rs/install.sh | sh
 
 echo "CREATED VIMRC SYMLINK"
 [ -d "$HOME/dotfiles" ] && ln -s $HOME/dotfiles/.vimrc $HOME/.vimrc
@@ -87,5 +103,8 @@ cargo install dust   # check hard drive space
 cargo install ripgrep # grep utility
 cargo install git-delta # git diff files
 cargo install fd-find # find utility
+cargo install dua-cli # disk usage analyzer
+cargo install bat # cat clone but better
+cargo install alacritty # terminal emulator
 
 # problems with ssh keys https://gist.github.com/adamjohnson/5682757
