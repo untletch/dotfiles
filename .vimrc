@@ -1,75 +1,62 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" Keep Plugin commands between vundle#begin/end.
+call plug#begin()
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+"   - Vim (Windows): '~/vimfiles/plugged'
+"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
 
 " Plugin for syntax linting
-Plugin 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 
 " Plugin for comments
-Plugin 'tomtom/tcomment_vim'
+Plug 'tomtom/tcomment_vim'
 
 " Plugin for visualizing undo history
-Plugin 'mbbill/undotree'
+Plug 'mbbill/undotree', { 'on': 'UNDOTREETOGGLE' }
 
 " Plugin for file tree
-Plugin 'preservim/nerdtree' 
+Plug 'preservim/nerdtree', { 'on': 'NERDTREETOGGLE' }
 
 " Plugin for searching files
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 " Plugin for auto pairing brackets
-Plugin 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
 " Plugin for multiple cursors
-Plugin 'mg979/vim-visual-multi'
+Plug 'mg979/vim-visual-multi'
 
 " Plugin for colorscheme
-Plugin 'tomasr/molokai'
+Plug 'tomasr/molokai'
 
 " Plugin for syntax highlighting
-Plugin 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 
 " Plugin for html
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 
 " Plugin for html-tags
-Plugin 'Valloric/MatchTagAlways'
+Plug 'Valloric/MatchTagAlways'
 
 " Plugin for svelte syntax highlighting
-Plugin 'evanleck/vim-svelte'
+Plug 'evanleck/vim-svelte', { 'for': 'svelte' }
 
 
 " Plugin for git
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-
-" Plugin for checking health
-Plugin 'rhysd/vim-healthcheck'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
 " Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+" :PlugInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PlugUpdate     - install or update plugins
+" :PlugClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
-" see :h vundle for more details or wiki for FAQ
+" see :h plug for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
 
@@ -223,7 +210,7 @@ let g:ale_linters = {
 \   'python': ['flake8', 'pylama'],
 \   'cpp': ['clangtidy'],
 \   'c': ['clangtidy'],
-\   'sql': ['sqlint'],
+\   'sql': ['sqlfluff'],
 \   'sh': ['shellcheck'],
 \}
 
@@ -247,7 +234,7 @@ let g:ale_fixers = {
   \    'rust': ['rustfmt'],
   \    'cpp': ['clangtidy', 'clang-format'],
   \    'c': ['clangtidy', 'clang-format'],
-  \    'sql': ['sqlfmt'],
+  \    'sql': ['sqlfmt', 'sqlfluff'],
   \    'sh': ['shfmt'],
 \}
 

@@ -1,5 +1,4 @@
 # change caps lock to escape
-
 setxkbmap -option caps:escape
 
 # change caps lock to escape and when held to ctrl

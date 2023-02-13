@@ -1,44 +1,27 @@
 #!/bin/bash
 
-echo "Install pip packages"
-function install {
-  which $1 &> /dev/null
-  if [ -d "$HOME/miniconda3" ]; then
-    if [ $? -ne 0 ]; then
-      echo "Installing: ${1}..."
-      pip install $1
-    else
-      echo "Already installed: ${1}"
-    fi
-  else
-    echo "PLEASE INSTALL MINICONDA"
-  fi
-}
-install black
-install flake8
-install isort
-install pylama
-install youtube-dl
-install ipython
-install bpython
-install jupyterlab
-# django and go templates linter and formatter
-install djlint
-# profiler
-install scalene
-# python markdown preview lib
-install grip
-
-echo "cloning dotfiles repository..."
-git clone https://github.com/untletch/dotfiles > /dev/null
-
-echo "add alias (l) to bashrc"
-echo "alias l='ls -Alh'" >> $HOME/.bashrc
-
-# install neovim
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod u+x nvim.appimage
-mv nvim.appimage ~/bin/nvim
+pip install \
+  # formatters and fixers
+  black \
+  flake8 \
+  isort \
+  pylama \
+  youtube-dl \
+  ipython \
+  bpython \
+  jupyterlab \
+  # django and go templates linter and formatter
+  djlint \
+  # profiler
+  scalene \
+  # python markdown preview lib
+  grip \
+  # file manager
+  ranger-fm
+  # sql formatter
+  shandy-sqlfmt[jinjafmt]
+  # sql linter and formatter
+  sqlfluff
 
 echo "add rust analyzer binary to fish"
 # cd ~/.local && mkdir bin
@@ -46,12 +29,6 @@ echo "add rust analyzer binary to fish"
 # set PATH ~/.local/bin $PATH
 # curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/.local/bin/rust-analyzer
 # chmod +x ~/.local/bin/rust-analyzer
-
-# install starship
-curl -sS https://starship.rs/install.sh | sh
-
-echo "CREATED VIMRC SYMLINK"
-[ -d "$HOME/dotfiles" ] && ln -s $HOME/dotfiles/.vimrc $HOME/.vimrc
 
 echo "add sites to hosts"
 sudo su
@@ -65,6 +42,19 @@ exit
 echo "create env directories"
 mkdir js python rust cpp
 
+# js packages
+sudo npm install --global yarn
+yarn config set prefix ~/.yarn
+fish_add_path ~/.yarn
+yarn global add eslint prettier stylelint
+
+# formatters and linters
+go install mvdan.cc/sh/v3/cmd/shfmt@latest
+go install golang.org/x/tools/cmd/goimports@latest
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+sudo apt install jq shellcheck
+sudo apt install clangtidy clang-format
+
 echo "create js env"
 touch js/index.js
 cd js && cp $HOME/dotfiles/.eslintrc.js .
@@ -72,9 +62,6 @@ npm install -g eslint prettier
 npm init -y && eslint --init
 cd
 # check if '(npx )eslint --init'
-
-echo "CREATED VIMRC SYMLINK"
-[ -d "$HOME/dotfiles" ] && ln -s $HOME/dotfiles/.vimrc $HOME/.vimrc
 
 # use pulseaudio to control volume
 echo "i3 volume notifications"
@@ -99,12 +86,13 @@ echo "Installing rust..."
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # install rust command line utitlities
-cargo install dust   # check hard drive space
+cargo install du-dust   # check hard drive space
 cargo install ripgrep # grep utility
 cargo install git-delta # git diff files
 cargo install fd-find # find utility
 cargo install dua-cli # disk usage analyzer
 cargo install bat # cat clone but better
 cargo install alacritty # terminal emulator
+cargo install cargo-watch # rust file watcher
 
 # problems with ssh keys https://gist.github.com/adamjohnson/5682757
