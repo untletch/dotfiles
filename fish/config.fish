@@ -1,13 +1,13 @@
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-eval /home/michaelw/miniconda3/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<
-
-alias vim nvim
-
-# Adds 256color to xterm
-set -gx TERM screen-256color-bce;
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end
 
 # Change fish greeting
 set -U fish_greeting ""
+
+# setting for pyenv
+pyenv init - | source
+
+alias cat bat
+
+alias rg "rg -i"

@@ -37,12 +37,12 @@ sudo apt install \
 	tk-dev
 
 # installing snaps
-sudo snap install go --classic
 sudo snap install pypy3 --classic
 sudo snap install node --classic
 sudo snap install bolls
 sudo snap install discord
 sudo snap install docker
+sudo snap install chromium
 sudo snap install postman
 
 # pyenv

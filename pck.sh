@@ -65,7 +65,7 @@ cd
 
 # use pulseaudio to control volume
 echo "i3 volume notifications"
-git clone https://github.com/hastinbe/i3-volume.git ~/i3-volume
+git clone --depth=1 https://github.com/hastinbe/i3-volume.git ~/i3-volume
 
 echo "Copying i3 configs"
 cp $HOME/dotfiles/i3/config $HOME

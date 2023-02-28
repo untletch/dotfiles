@@ -16,5 +16,5 @@ done
 tmux new-session \; \
 	send-keys "vim ./src/main.rs" C-m \; \
 	split-window -h \; \
-	send-keys "cargo watch -s 'clear && cargo run -q'" C-m \; \
+	send-keys "cargo watch -q -c -w src/ -x run" C-m \; \
 	select-pane -L

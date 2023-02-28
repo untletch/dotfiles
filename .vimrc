@@ -11,13 +11,13 @@ Plug 'dense-analysis/ale'
 Plug 'tomtom/tcomment_vim'
 
 " Plugin for visualizing undo history
-Plug 'mbbill/undotree', { 'on': 'UNDOTREETOGGLE' }
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 
 " Plugin for file tree
-Plug 'preservim/nerdtree', { 'on': 'NERDTREETOGGLE' }
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " Plugin for searching files
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Plugin for auto pairing brackets
