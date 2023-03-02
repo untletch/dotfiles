@@ -3,6 +3,8 @@
   email = untletch@gmail.com
 [core]
   excludesfile = ~/.gitignore_global
+[init]
+  defaultBranch = main
 [color]
   diff = auto
   status = auto
@@ -37,3 +39,9 @@
     line-numbers-right-style = cyan
     line-numbers-minus-style = 124
     line-numbers-plus-style = 28
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
