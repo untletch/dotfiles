@@ -46,7 +46,7 @@ mkdir js python rust cpp
 sudo npm install --global yarn
 yarn config set prefix ~/.yarn
 fish_add_path ~/.yarn
-yarn global add eslint prettier stylelint stylelint-config-standard
+yarn global add eslint prettier stylelint
 
 # formatters and linters
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
