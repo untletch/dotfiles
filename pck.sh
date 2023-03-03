@@ -1,27 +1,27 @@
 #!/bin/bash
 
-pip install \
-  # formatters and fixers
-  black \
-  flake8 \
-  isort \
-  pylama \
-  youtube-dl \
-  ipython \
-  bpython \
-  jupyterlab \
-  # django and go templates linter and formatter
-  djlint \
-  # profiler
-  scalene \
-  # python markdown preview lib
-  grip \
-  # file manager
-  ranger-fm
-  # sql formatter
-  shandy-sqlfmt[jinjafmt]
-  # sql linter and formatter
-  sqlfluff
+pip install
+# formatters and fixers
+black \
+	flake8 \
+	isort \
+	pylama \
+	youtube-dl \
+	ipython \
+	bpython \
+	jupyterlab
+# django and go templates linter and formatter
+djlint
+# profiler
+scalene
+# python markdown preview lib
+grip
+# file manager
+ranger-fm
+# sql formatter
+shandy-sqlfmt[jinjafmt]
+# sql linter and formatter
+sqlfluff
 
 echo "add rust analyzer binary to fish"
 # cd ~/.local && mkdir bin
@@ -32,11 +32,11 @@ echo "add rust analyzer binary to fish"
 
 echo "add sites to hosts"
 sudo su
-echo "0.0.0.0 twitter.com" >> /etc/hosts
-echo "0.0.0.0 lichess.org" >> /etc/hosts
-echo "0.0.0.0 www.reddit.com"  >> /etc/hosts
-echo "0.0.0.0 old.reddit.com"  >> /etc/hosts
-echo "0.0.0.0 www.youtube.com"  >> /etc/hosts
+echo "0.0.0.0 twitter.com" >>/etc/hosts
+echo "0.0.0.0 lichess.org" >>/etc/hosts
+echo "0.0.0.0 www.reddit.com" >>/etc/hosts
+echo "0.0.0.0 old.reddit.com" >>/etc/hosts
+echo "0.0.0.0 www.youtube.com" >>/etc/hosts
 exit
 
 echo "create env directories"
@@ -46,7 +46,7 @@ mkdir js python rust cpp
 sudo npm install --global yarn
 yarn config set prefix ~/.yarn
 fish_add_path ~/.yarn
-yarn global add eslint prettier stylelint
+yarn global add eslint prettier stylelint stylelint-config-standard
 
 # formatters and linters
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
@@ -79,20 +79,20 @@ cp $HOME/dotfiles/.tmux.conf $HOME
 
 echo "Make fish Default"
 # use https://www.peachpit.com/articles/article.aspx?p=659655&seqNum=3
-sudo chsh -s `which fish`
+sudo chsh -s $(which fish)
 conda init fish
 
 echo "Installing rust..."
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # install rust command line utitlities
-cargo install du-dust   # check hard drive space
-cargo install ripgrep # grep utility
-cargo install git-delta # git diff files
-cargo install fd-find # find utility
-cargo install dua-cli # disk usage analyzer
-cargo install bat # cat clone but better
-cargo install alacritty # terminal emulator
+cargo install du-dust     # check hard drive space
+cargo install ripgrep     # grep utility
+cargo install git-delta   # git diff files
+cargo install fd-find     # find utility
+cargo install dua-cli     # disk usage analyzer
+cargo install bat         # cat clone but better
+cargo install alacritty   # terminal emulator
 cargo install cargo-watch # rust file watcher
 
 # problems with ssh keys https://gist.github.com/adamjohnson/5682757
