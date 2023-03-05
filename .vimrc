@@ -10,9 +10,6 @@ Plug 'dense-analysis/ale'
 " Plugin for comments
 Plug 'tomtom/tcomment_vim'
 
-" Plugin for visualizing undo history
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-
 " Plugin for file tree
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 
@@ -41,9 +38,12 @@ Plug 'Valloric/MatchTagAlways'
 " Plugin for svelte syntax highlighting
 Plug 'evanleck/vim-svelte', { 'for': 'svelte' }
 
+" Plugin for display colors from hexcodes
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " Plugin for git
 Plug 'tpope/vim-fugitive'
+"https://jeancharles.quillet.org/posts/2022-03-02-Practical-introduction-to-fugitive.html
 Plug 'airblade/vim-gitgutter'
 
 " All of your Plugins must be added before the following line
@@ -203,10 +203,10 @@ let g:ale_linters = {
 \   'typescriptreact': ['eslint'],
 \   'vue': ['eslint'],
 \   'svelte': ['eslint'],
-\   'css': ['stylelint', 'prettier'],
+\   'css': ['prettier', 'stylelint'],
 \   'scss': ['stylelint'],
 \   'html': ['prettier'],
-\   'go': ['golangci-lint', 'gofmt'],
+\   'go': ['gofmt', 'golangci-lint'],
 \   'python': ['flake8', 'pylama'],
 \   'cpp': ['clangtidy'],
 \   'c': ['clangtidy'],
@@ -217,6 +217,9 @@ let g:ale_linters = {
 " Only run linters named in ale_linters settings
 let g:ale_linters_explicit = 1
 
+" Check the whole golang package instead of a single file
+" let g:ale_go_golangci_lint_package = 1
+
 " Run 'rustup component add rustfmt'
 let g:ale_fixers = {
   \    'javascript': ['eslint'],
@@ -225,9 +228,9 @@ let g:ale_fixers = {
   \    'typescriptreact': ['prettier'],
   \    'vue': ['eslint', 'prettier'],
   \    'svelte': ['eslint'],
-  \    'css': ['stylelint', 'prettier'],
-  \    'scss': ['stylelint', 'prettier'],
-  \    'json': ['jq', 'prettier'],
+  \    'css': ['prettier', 'stylelint'],
+  \    'scss': ['prettier', 'stylelint'],
+  \    'json': ['prettier', 'jq'],
   \    'html': ['prettier'],
   \    'python': ['black', 'isort'],
   \    'go': ['gofmt', 'goimports'],
@@ -243,10 +246,12 @@ let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 
-" UndoTree
-nnoremap <Space>ut :UndotreeToggle<CR>
-
-nnoremap <Space>f :w<CR>:FZF<CR>
+" Fzf
+if line('$') == 1 && getline(1) == ''
+    nnoremap <Space>f :FZF<CR>
+else
+    nnoremap <Space>f :w<CR>:FZF<CR>
+endif
 
 " Emmet
 " Use ,, for html5 snippet
