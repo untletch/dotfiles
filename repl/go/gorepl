@@ -6,6 +6,7 @@ PROJECT_DIR="${PLAYGROUNDS_DIR}/playground${TIMESTAMP}"
 
 mkdir "$PROJECT_DIR"
 cd "$PROJECT_DIR" || exit
+echo -e 'package main\n\nimport "fmt"\n\nfunc main(){\n\tfmt.Println("hello")\n}' >>main.go
 go mod init
 
 for dependency in "$@"; do
