@@ -51,5 +51,10 @@ def compare_hash():
 
 
 if __name__ == "__main__":
-    download_sqlite_binary()
-    compare_hash()
+    try:
+        download_sqlite_binary()
+        compare_hash()
+    except requests.exceptions.Timeout:
+        print("the request timed out")
+    except Exception as err:
+        print(f"an error occurred: {err}")
