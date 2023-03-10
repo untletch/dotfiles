@@ -6,10 +6,12 @@ from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
 
+TIMEOUT = 10
+
 
 def scrape_downloads_page():
     url = "https://www.sqlite.org/download.html"
-    resp = requests.get(url)
+    resp = requests.get(url, timeout=TIMEOUT)
     if resp.status_code != 200:
         raise Exception(f"error: response status code: {resp.status_code}")
     soup = BeautifulSoup(resp.content, "html.parser")
@@ -23,7 +25,7 @@ def download_sqlite_binary():
     _, filename = scrape_downloads_page()
     filepath = os.path.join(pathlib.Path.home(), "Downloads", filename)
     url = f"https://www.sqlite.org/{datetime.now().year}/{filename}"
-    resp = requests.get(url)
+    resp = requests.get(url, timeout=TIMEOUT)
     if resp.status_code != 200:
         raise Exception(f"error: response status code: {resp.status_code}")
     with open(filepath, "wb") as f:
