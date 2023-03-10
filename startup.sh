@@ -53,18 +53,7 @@ curl https://pyenv.run | bash
 # install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-# Configure pgadmin
-mkdir pgadmin && cd pgadmin
-python -m venv venv && source venv/bin/activate.fish
-# conda create --name pgadmin python=3.10
-# conda activate pgadmin
-pip install pgadmin4 gevent
-sudo mkdir /var/lib/pgadmin
-sudo mkdir /var/log/pgadmin
-sudo chown $USER /var/lib/pgadmin
-sudo chown $USER /var/log/pgadmin
-# command: pgadmin4
-
+# Install pgadmin/postgres
 # used digital ocean docs
 # install pgadmin and check for docs in https://www.pgadmin.org/download/pgadmin-4-apt/
 # sudo -u <user> psql
