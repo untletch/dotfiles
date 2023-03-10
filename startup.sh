@@ -22,7 +22,8 @@ sudo apt install \
 	zeal \
 	valgrind \
 	postgresql \
-	postgresql-contrib
+	postgresql-contrib \
+	xautolock
 
 # apt packages for python3
 sudo apt install \
@@ -66,8 +67,9 @@ sudo chown $USER /var/log/pgadmin
 
 # used digital ocean docs
 # install pgadmin and check for docs in https://www.pgadmin.org/download/pgadmin-4-apt/
-# enter psql
-# type \password
+# sudo -u <user> psql
+# ALTER USER <user> PASSWORD 'password'
+# cp /usr/pgadmin4/bin/pgadmin4 ~/bin/
 # mongodb https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 # mongo compass https://www.mongodb.com/try/download/compass
 
