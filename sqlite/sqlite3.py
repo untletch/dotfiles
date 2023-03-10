@@ -26,9 +26,9 @@ def download_sqlite_binary():
     resp = requests.get(url)
     if resp.status_code != 200:
         raise Exception(f"error: response status code: {resp.status_code}")
-    binary = resp.content
     with open(filepath, "wb") as f:
-        f.write(binary)
+        for chunk in resp.iter_content(chunk_size=4 * 1024):
+            f.write(chunk)
     return filepath
 
 
