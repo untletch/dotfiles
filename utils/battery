@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+while true; do
+	POWER=$(acpi -b | grep 'Battery 0' | grep -o '[0-9]\+%' | tr -d '%')
+	if [[ $POWER -le 20 ]]; then
+		notify-send -u CRITICAL -t 0 "Battery power is lower than 20%"
+	fi
+	sleep 5m
+done
