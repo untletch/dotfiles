@@ -23,7 +23,8 @@ sudo apt install \
 	valgrind \
 	postgresql \
 	postgresql-contrib \
-	xautolock
+	xautolock \
+	acpi
 
 # apt packages for python3
 sudo apt install \
