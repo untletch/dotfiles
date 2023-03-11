@@ -36,6 +36,9 @@ exec --no-startup-id nm-applet
 # imports xfce4 config settings
 exec_always --no-startup-id xfsettingsd
 
+# battery script that warns on low battery
+exec --no-startup-id battery
+
 # Wallpaper for i3 static color dark-grey
 exec --no-startup-id xsetroot -solid "#333333"
 
