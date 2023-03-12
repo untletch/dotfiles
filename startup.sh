@@ -24,7 +24,8 @@ sudo apt install \
 	postgresql \
 	postgresql-contrib \
 	xautolock \
-	acpi
+	acpi \
+	trash-cli
 
 # apt packages for python3
 sudo apt install \
