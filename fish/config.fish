@@ -10,4 +10,4 @@ pyenv init - | source
 
 alias cat bat
 
-alias rg "rg -i"
+alias del rmtrash
