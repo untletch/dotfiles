@@ -16,5 +16,4 @@ done
 tmux new-session \; \
 	send-keys "vim ./main.go" C-m \; \
 	split-window -v \; \
-	send-keys "watchexec 'clear;go run main.go'" C-m \;\
-	select-pane -U
+	send-keys "watchexec 'clear;go run main.go'" C-m \; select-pane -U
