@@ -1,27 +1,22 @@
 #!/bin/bash
 
-pip install
-# formatters and fixers
-black \
-	flake8 \
-	isort \
-	pylama \
-	youtube-dl \
-	ipython \
-	bpython \
-	jupyterlab
+# python formatters
+pip install black flake8 isort pylama
+
+# python repls
+pip install ipython bpython jupyterlab
+
+# python profile
+pip install scalene
+
 # django and go templates linter and formatter
-djlint
-# profiler
-scalene
-# python markdown preview lib
-grip
-# file manager
-ranger-fm
-# sql formatter
-shandy-sqlfmt[jinjafmt]
-# sql linter and formatter
-sqlfluff
+pip install djlint
+
+# python terminal utils
+pip install youtube-dl httpie ranger-fm grip
+
+# sql formatters
+pip install "shandy-sqlfmt[jinjafmt] sqlfluff"
 
 echo "add rust analyzer binary to fish"
 # cd ~/.local && mkdir bin
@@ -32,11 +27,8 @@ echo "add rust analyzer binary to fish"
 
 echo "add sites to hosts"
 sudo su
-echo "0.0.0.0 twitter.com" >>/etc/hosts
-echo "0.0.0.0 lichess.org" >>/etc/hosts
-echo "0.0.0.0 www.reddit.com" >>/etc/hosts
-echo "0.0.0.0 old.reddit.com" >>/etc/hosts
-echo "0.0.0.0 www.youtube.com" >>/etc/hosts
+printf "0.0.0.0 twitter.com\n0.0.0.0 lichess.org\n0.0.0.0 www.reddit.com\n \
+	0.0.0.0 old.reddit.com\n0.0.0.0 www.youtube.com\n" >>/etc/hosts
 exit
 
 echo "create env directories"
@@ -57,29 +49,25 @@ sudo apt install clangtidy clang-format
 
 echo "create js env"
 touch js/index.js
-cd js && cp $HOME/dotfiles/.eslintrc.js .
+cd js && cp "$HOME"/dotfiles/.eslintrc.js .
 npm install -g eslint prettier
 npm init -y && eslint --init
-cd
+cd "$HOME" || exit
 # check if '(npx )eslint --init'
 
-# use pulseaudio to control volume
-echo "i3 volume notifications"
-git clone --depth=1 https://github.com/hastinbe/i3-volume.git ~/i3-volume
-
 echo "Copying i3 configs"
-cp $HOME/dotfiles/i3/config $HOME
-cp $HOME/dotfiles/i3/i3status $HOME/.config
+cp "$HOME"/dotfiles/i3/config "$HOME"
+cp "$HOME"/dotfiles/i3/i3status "$HOME"/.config
 
 echo "Copying gitconfig"
-cp $HOME/dotfiles/.gitconfig $HOME
+cp "$HOME"/dotfiles/.gitconfig "$HOME"
 
 echo "Copying tmux.conf"
-cp $HOME/dotfiles/.tmux.conf $HOME
+cp "$HOME"/dotfiles/.tmux.conf "$HOME"
 
 echo "Make fish Default"
 # use https://www.peachpit.com/articles/article.aspx?p=659655&seqNum=3
-sudo chsh -s $(which fish)
+sudo chsh -s "$(which fish)"
 conda init fish
 
 echo "Installing rust..."
