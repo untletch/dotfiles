@@ -15,7 +15,7 @@ Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " Plugin for searching files
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim', { 'on': 'FZF' }
 
 " Plugin for auto pairing brackets
 Plug 'jiangmiao/auto-pairs'
@@ -67,6 +67,7 @@ call plug#end()
 syntax enable
 syntax on
 colorscheme molokai
+set termguicolors
 " disable mouse activity when using vim
 set mouse=
 set ttymouse=
@@ -247,17 +248,16 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 
 " Fzf
-if line('$') == 1 && getline(1) == ''
-    nnoremap <Space>f :FZF<CR>
-else
-    nnoremap <Space>f :w<CR>:FZF<CR>
-endif
+nnoremap <Space>f :FZF<CR>
 
 " Emmet
 " Use ,, for html5 snippet
 let g:user_emmet_leader_key=','
 " Only enable normal mode functions.
 let g:user_emmet_mode='n'    
+
+" Hexokinase
+let g:Hexokinase_highlighters = ['backgroundfull']
 
 " NerdTree
 " Use ',' and n
@@ -286,40 +286,3 @@ au FileType htmldjango set filetype=html
 
 " Folding Key
 nnoremap <space> za
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
- " => Shortcuts 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Shortcuts to remember
-    ":sp --> split window horizontally
-    ":vp --> split window vertically
-    ":Files --> (fzf) To search for files
-    "gs --> (nerdTree) open files
-    "m --> (nerdTree) add files to dirs
-    "ctrl + ww --> For split window navigation
-    "y --> Copy
-    "yy --> Copy line
-    "p --> Paste
-    "a --> Insert after cursor
-    "dd --> Delete line
-    "d --> Delete word
-    "o --> Insert after newline
-    "b --> Beginning of word
-    "e --> End of word
-    "> --> Indent
-    ". --> Repeats command
-    "s --> Substitute character
-    "c --> Change
-    ":1,34delete, yank, join move --> Ex commands
-    "* --> to search for word pointed to by cursor
-    ":p --> Ex command to print
-    ":s --> Ex command to substitute
-    ":% --> all lines in current file
-    ":%s/cat/donkey --> substitutes cat for donkey in all places in file
-    "shift + g --> End of File
-    "= --> autoindent
-    "* + c + w --> search for word when cursor is on word and replace
-    "shift + s --> substitute a line
-    "gcc --> to comment
-    "gi --> go back to cursor insert mode
