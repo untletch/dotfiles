@@ -39,6 +39,9 @@ exec_always --no-startup-id xfsettingsd
 # battery script that warns on low battery
 exec --no-startup-id battery
 
+# Delete contents of temp directory
+exec --no-startup-id temp
+
 # Wallpaper for i3 static color dark-grey
 exec --no-startup-id xsetroot -solid "#333333"
 
