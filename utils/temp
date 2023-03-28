@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+# remove contents in temp directory
+rm -rf ~/temp
+mkdir ~/temp
+notify-send "Cleared Temp Dir"
