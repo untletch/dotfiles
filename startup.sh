@@ -66,12 +66,14 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # install zathura
 sudo apt install zathura zathura-djvu zathura-pdf-poppler
+# enable dark theme for zathura
+git clone https://github.com/dracula/zathura ~/.config/zathura/
 
 echo "configure docker to remove sudo"
 echo "adding docker as a user group"
 sudo groupadd docker
 echo "add $USER as member of docker"
-sudo usermod -aG docker $USER
+sudo usermod -aG docker "$USER"
 
 echo "Restarting System..."
 sudo shutdown
