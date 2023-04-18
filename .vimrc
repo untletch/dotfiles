@@ -15,7 +15,7 @@ Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " Plugin for searching files
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim', { 'on': 'FZF' }
+Plug 'junegunn/fzf.vim'
 
 " Plugin for auto pairing brackets
 Plug 'jiangmiao/auto-pairs'
@@ -142,12 +142,17 @@ set splitright                       " New vertical split screen is set to the r
 
 " enter terminal mode using ','t
 tnoremap <leader>t <c-w>N
+
 " build and run code
 autocmd Filetype python nmap <leader>r :w<CR>:!clear;python %<CR>
 autocmd Filetype rust nmap <leader>r :w<CR>:!clear;cargo run<CR>
 autocmd Filetype go nmap <leader>r :w<CR>:!clear;go run .<CR>
 autocmd Filetype c nmap <leader>r :w<CR>:!clear;gcc -O2 -Wall -Wextra % -o out && ./out<CR>
 autocmd Filetype cpp nmap <leader>r :w<CR>:!clear;g++ -O2 -Wall a.cpp -o a && ./a > output.txt<CR>
+
+" Disable Ex mode
+map q: <Nop>
+nnoremap Q <Nop>
 
 " use ,q to exit
 " nnoremap <leader>q :wq <CR>
@@ -176,6 +181,9 @@ vnoremap <Right> <Nop>
 
 " press i to enter insert mode and jj to exit.
 " imap jj <Esc>
+
+" Split screen terminal
+" nnoremap <leader>s :term<CR><C-w>N<C-w><C-k>
 
 " Split screen navigations
 " <C-W>w move between terminal and window
@@ -208,7 +216,7 @@ let g:ale_linters = {
 \   'scss': ['stylelint'],
 \   'html': ['prettier'],
 \   'go': ['gofmt', 'golangci-lint'],
-\   'python': ['flake8', 'pylama'],
+\   'python': ['flake8', 'ruff'],
 \   'cpp': ['clangtidy'],
 \   'c': ['clangtidy'],
 \   'sql': ['sqlfluff'],
