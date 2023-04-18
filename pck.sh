@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # python formatters
-pip install black flake8 isort pylama
+pip install black flake8 isort ruff
 
 # python repls
 pip install ipython bpython jupyterlab
